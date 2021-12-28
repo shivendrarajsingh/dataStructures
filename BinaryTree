@@ -1,0 +1,67 @@
+package com.shivendra.demo;
+
+import java.util.ArrayDeque;
+
+public class BinaryTree {
+	
+	Node root;
+	
+	public void preOrder(Node root) {
+		if(root == null)
+			return;
+		System.out.print(root.data + " ");
+		preOrder(root.left);
+		preOrder(root.right);
+	}
+	
+	public void postOrder(Node root) {
+		if(root == null)
+			return;
+		preOrder(root.left);
+		preOrder(root.right);
+		System.out.print(root.data + " ");
+	}
+	
+	public void inOrder(Node root) {
+		if(root == null)
+			return;
+		preOrder(root.left);
+		System.out.print(root.data + " ");
+		preOrder(root.right);
+	}
+	
+	public void bfsTraversal(Node root) {
+		Node temp = root;
+		if(temp == null)
+			return;
+		ArrayDeque<Node> ad = new ArrayDeque<>(); 
+		ad.push(temp);
+		while(!ad.isEmpty())
+		{
+			Node node = ad.pollFirst();
+			if(node.left != null)
+				ad.addLast(node.left);
+			if(node.right != null)
+				ad.addLast(node.right);
+			System.out.print(node.data + " ");
+		}
+		System.out.println();
+	}
+
+	public static void main(String[] args) {
+		BinaryTree bt = new BinaryTree();
+		bt.root = new Node(1);
+		bt.root.left = new Node(2);
+		bt.root.right = new Node(3);
+		bt.root.left.left = new Node(4);
+		bt.root.left.right = new Node(5);
+		bt.root.right.left = new Node(6);
+		bt.root.right.right = new Node(7);
+		
+		bt.bfsTraversal(bt.root);
+		bt.preOrder(bt.root);
+		
+		
+	}
+
+}
